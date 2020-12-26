@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { DefaultSeo } from "next-seo";
 import theme from "../styles/theme";
-import SideBar from "../src/side_bar/side_bar";
+import SideBar from "../src/components/side_bar/side_bar";
 import "simplebar/dist/simplebar.min.css";
 
 export default class MyApp extends App {

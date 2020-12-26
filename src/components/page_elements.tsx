@@ -11,7 +11,7 @@ import { Alert } from "@material-ui/lab";
 
 export function PageBreadcrumbs({}: any) {
   const router = useRouter();
-  const parts = router?.pathname.split("/").slice(2);
+  const parts = router?.pathname.split("/").slice(1);
 
   return (
     <Fragment>
@@ -43,12 +43,14 @@ export function PageBreadcrumbs({}: any) {
   );
 }
 
-export function PageHeader({ title, subtitle, children }: any) {
+export function PageHeader({ title, subtitle }: any) {
   return (
     <Fragment>
       <PageBreadcrumbs />
+      <div style={{ height: 8 }} />
       <Typography variant="h1">{title}</Typography>
-      <Typography variant="body1">{subtitle}</Typography>
+      <div style={{ height: 4 }} />
+      <Typography variant="body2">{subtitle}</Typography>
       <div style={{ height: 64 }} />
       <Divider />
       <div style={{ height: 16 }} />
@@ -61,8 +63,8 @@ export function PageSection({ title, children }: any) {
     <Fragment>
       <div style={{ height: 18 }} />
       <Typography variant="h2">{title}</Typography>
-      <div style={{ height: 5 }} />
-      {children}
+      <div style={{ height: 8 }} />
+      <Typography variant="body1">{children}</Typography>
       <div style={{ height: 24 }} />
     </Fragment>
   );

@@ -4,7 +4,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: "Roboto",
     h1: {
-      fontSize: 48,
+      fontSize: 42,
       fontWeight: 400,
       letterSpacing: -1.2,
     },
@@ -16,6 +16,7 @@ const theme = createMuiTheme({
     },
     h4: {
       fontSize: 18,
+      fontWeight: 500,
     },
     subtitle1: {
       lineHeight: 1.3,
@@ -27,16 +28,13 @@ const theme = createMuiTheme({
     body1: {
       fontSize: 15,
       color: "#767676",
-      marginTop: 8,
-      marginBottom: 16,
     },
     body2: {
       fontSize: 14,
       color: "#767676",
-      marginBottom: 8,
     },
     caption: {
-      fontSize: 13,
+      fontSize: 12,
       color: "#767676",
     },
   },

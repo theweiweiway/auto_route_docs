@@ -9,16 +9,18 @@ import {
   IconButton,
   Drawer,
 } from "@material-ui/core";
-import Router from "next/router";
 import { useRouter } from "next/router";
-import { useScreenSize } from "../hooks/use_screen_size";
+import { useScreenSize } from "../../hooks/use_screen_size";
 import { sideBarItems } from "./side_bar_items";
 import SimpleBar from "simplebar-react";
 import MenuIcon from "@material-ui/icons/Menu";
-import theme from "../../styles/theme";
+import theme from "../../../styles/theme";
+import Router from "next/router";
+import { GitHub } from "@material-ui/icons";
+import { pushExternalRoute } from "../../functions";
 
 const useStyles = makeStyles((theme) => ({
-  wrapper: { width: 250 },
+  wrapper: { display: "flex" },
   root: { width: "100%" },
   section: {},
   selectedSection: { background: "#e5e5e5" },
@@ -44,55 +46,56 @@ export default function SideBar({ children }: any) {
   const { isSmall } = useScreenSize();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  useEffect(() => {}, [isSmall]);
-
   return (
     <div className={classes.wrapper}>
-      {isSmall ? (
-        <Fragment>
-          <Drawer
-            variant="temporary"
-            open={drawerOpen}
-            onClose={() => setDrawerOpen(false)}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true,
-            }}
-          >
-            <SideBarContent
-              toggleDrawer={() => {
-                setDrawerOpen(!drawerOpen);
+      <div>
+        {isSmall ? (
+          <Fragment>
+            <IconButton
+              style={{
+                zIndex: 9999,
+                position: "fixed",
+                bottom: 8,
+                right: 8,
+                background: theme.palette.secondary.main,
               }}
-            />
-          </Drawer>
-          <IconButton
+              onClick={() => setDrawerOpen(true)}
+            >
+              {" "}
+              <MenuIcon
+                style={{ fontSize: 36, color: theme.palette.primary.main }}
+              />{" "}
+            </IconButton>
+            <Drawer
+              variant="temporary"
+              open={drawerOpen}
+              onClose={() => setDrawerOpen(false)}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              ModalProps={{
+                keepMounted: true,
+              }}
+            >
+              <SideBarContent
+                toggleDrawer={() => {
+                  setDrawerOpen(!drawerOpen);
+                }}
+              />
+            </Drawer>
+          </Fragment>
+        ) : (
+          <SimpleBar
             style={{
-              position: "fixed",
-              bottom: 8,
-              right: 8,
-              background: theme.palette.secondary.main,
+              height: `100vh`,
+              minWidth: 250,
+              borderRight: "1px solid lightGrey",
             }}
-            onClick={() => setDrawerOpen(true)}
           >
-            {" "}
-            <MenuIcon
-              style={{ fontSize: 36, color: theme.palette.primary.main }}
-            />{" "}
-          </IconButton>
-        </Fragment>
-      ) : (
-        <SimpleBar
-          style={{
-            height: `100vh`,
-            minWidth: 250,
-            borderRight: "1px solid lightGrey",
-          }}
-        >
-          <SideBarContent />
-        </SimpleBar>
-      )}
+            <SideBarContent />
+          </SimpleBar>
+        )}
+      </div>
       {/* This SimpleBar is for page Body, not side bar */}
       <SimpleBar
         style={{
@@ -104,16 +107,16 @@ export default function SideBar({ children }: any) {
           display: "flex",
         }}
       >
-        <div style={{ maxWidth: 900 }}> {children}</div>
+        <div style={{ width: "100%" }}> {children}</div>
       </SimpleBar>
     </div>
   );
 }
 
-function SideBarContent({ children, toggleDrawer }: any) {
+function SideBarContent({ toggleDrawer }: any) {
   const classes = useStyles();
   const router = useRouter();
-  const logoCombined = require("../assets/logo_combined.png");
+  const logoCombined = require("../../assets/logo_combined.png");
 
   const isExpanded = (sectionPathname: string) => {
     if (router.pathname.includes(sectionPathname)) return true;
@@ -125,11 +128,15 @@ function SideBarContent({ children, toggleDrawer }: any) {
       <img
         src={logoCombined}
         style={{
+          cursor: "pointer",
           width: "100%",
           paddingLeft: 20,
           paddingRight: 20,
           paddingTop: 16,
           paddingBottom: 12,
+        }}
+        onClick={() => {
+          Router.push("/");
         }}
       />
       <Divider />
@@ -192,6 +199,15 @@ function SideBarContent({ children, toggleDrawer }: any) {
           </Fragment>
         );
       })}
+
+      <GitHub
+        style={{ position: "fixed", bottom: 12, left: 18, cursor: "pointer" }}
+        onClick={() =>
+          pushExternalRoute(
+            "https://github.com/Milad-Akarie/auto_route_library"
+          )
+        }
+      />
     </div>
   );
 }
