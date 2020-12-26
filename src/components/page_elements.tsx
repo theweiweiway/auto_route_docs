@@ -22,6 +22,7 @@ export function PageBreadcrumbs({}: any) {
 
           return (
             <Typography
+              key={idx}
               style={{
                 margin: 0,
                 textTransform: "capitalize",
@@ -120,9 +121,10 @@ export function MultiPageImage({
       <div
         style={{ display: "flex", margin: "auto", justifyContent: "center" }}
       >
-        {images.map((a) => {
+        {images.map((a, idx) => {
           return (
             <Card
+              key={idx}
               style={{
                 margin: "auto",
                 borderRadius: 16,
