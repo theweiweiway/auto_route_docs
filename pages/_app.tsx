@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
     return (
       <React.Fragment>
         <DefaultSeo
-          title="AutoRoute"
+          title="AutoRoute • Flutter Navigation Made Easy"
           description="A Flutter navigation package that allows for strongly-typed arguments passing, effortless deep-linking and code generation to simplify routes setup with minimal code"
         />
         <Head>

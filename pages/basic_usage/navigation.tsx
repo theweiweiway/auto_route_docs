@@ -1,5 +1,4 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
 import { PageHeader, PageSection } from "../../src/components/page_elements";
 
