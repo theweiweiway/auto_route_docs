@@ -39,7 +39,7 @@ export function InlineCode({ children }: any) {
         }}
       >
         {children}
-      </code>
+      </code>{" "}
     </Fragment>
   );
 }

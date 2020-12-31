@@ -137,6 +137,7 @@ function SideBarContent({ toggleDrawer }: any) {
         }}
         onClick={() => {
           Router.push("/");
+          if (toggleDrawer) toggleDrawer();
         }}
       />
       <Divider />
@@ -149,11 +150,11 @@ function SideBarContent({ toggleDrawer }: any) {
                   ? classes.selectedSection
                   : classes.section
               }
-              button
-              onClick={() => {
-                Router.push(item.url);
-                if (toggleDrawer) toggleDrawer();
-              }}
+              // button
+              // onClick={() => {
+              //   Router.push(item.url);
+              //   if (toggleDrawer) toggleDrawer();
+              // }}
             >
               <Typography
                 style={{
@@ -170,7 +171,10 @@ function SideBarContent({ toggleDrawer }: any) {
               return (
                 <Fragment>
                   <Collapse
-                    in={isExpanded(item.section)}
+                    in={
+                      true
+                      // isExpanded(item.section)
+                    }
                     timeout="auto"
                     unmountOnExit
                   >

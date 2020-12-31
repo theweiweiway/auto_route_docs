@@ -26,11 +26,11 @@ export function PageBreadcrumbs({}: any) {
               style={{
                 margin: 0,
                 textTransform: "capitalize",
-                cursor: idx === parts.length - 1 ? "default" : "pointer",
-                textDecoration: idx === parts.length - 1 ? "none" : "underline",
-                color: idx === parts.length - 1 ? "default" : "#0859c6",
+                // cursor: idx === parts.length - 1 ? "default" : "pointer",
+                // textDecoration: idx === parts.length - 1 ? "none" : "underline",
+                // color: idx === parts.length - 1 ? "default" : "#0859c6",
               }}
-              onClick={() => Router.push(newUrl)}
+              // onClick={() => Router.push(newUrl)}
             >
               {a
                 .replace(/_/gm, " ")
@@ -77,6 +77,7 @@ export function PageImage({
   caption,
   maxWidth = undefined,
   marginTop = 32,
+  flat = false,
 }: any) {
   return (
     <div
@@ -92,8 +93,9 @@ export function PageImage({
           borderRadius: 16,
           marginBottom: 4,
           maxWidth: maxWidth,
+          background: flat ? "transparent" : "default",
         }}
-        elevation={3}
+        elevation={flat ? 0 : 3}
       >
         <CardMedia component="img" image={image} title={title} />
       </Card>
