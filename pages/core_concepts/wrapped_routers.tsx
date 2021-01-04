@@ -13,10 +13,15 @@ export default function BasicUsage() {
         <b>Independent Routers</b>, we may want to wrap the{" "}
         <InlineCode>bookRouter</InlineCode> with a{" "}
         <InlineCode>SafeArea</InlineCode>, <InlineCode>Scaffold</InlineCode> and{" "}
-        <InlineCode>Bloc</InlineCode>.
+        <InlineCode>BookBloc</InlineCode>. This would make sure that every single route inside of
+        <InlineCode>bookRouter</InlineCode> has access to the <InlineCode>BookBloc</InlineCode>, as 
+        well as have a <InlineCode>Scaffold</InlineCode> and <InlineCode>SafeArea</InlineCode> to work with.
       </PageSection>
       <PageSection title="Setup">
-        First, define a <InlineCode>BookWrapperPage</InlineCode> widget:
+        To acheive this, first define a <InlineCode>BookWrapperPage</InlineCode> 
+        with <InlineCode>AutoRouteWrapper</InlineCode>. Now override the 
+        <InlineCode>wrappedRoute</InlineCode> widget with whatever you want to wrap the router in,
+        making sure to return <InlineCode>this</InlineCode> as the child.
         <CodeBlock
           codeString={`class BookWrapperPage extends AutoRouter with AutoRouteWrapper {
   const BookWrapperPage({Key key}) : super(key: key);
@@ -57,6 +62,33 @@ export default function BasicUsage() {
         Now, your <InlineCode>bookRouter</InlineCode> is wrapped with a{" "}
         <InlineCode>SafeArea</InlineCode>, <InlineCode>Scaffold</InlineCode> and{" "}
         <InlineCode>BookBloc</InlineCode>!
+      </PageSection>
+      <PageSection title="The secret ingredient">
+        You may have noticed that in the example above that
+      <InlineCode><b>BookWrapperPage</b> extends <b>AutoRouter</b></InlineCode>. 
+      The <InlineCode> <b>AutoRouter</b></InlineCode> widget is the key that allows the router to work! 
+      In fact, we could choose not to extend <InlineCode>AutoRouter</InlineCode> and instead return 
+      <InlineCode>AutoRouter()</InlineCode> as shown in the example below and everything
+      would function perfectly! 
+      <CodeBlock codeString={`class BookWrapperPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BookBloc(),
+        ),
+      ],
+      child: Scaffold(
+        child: SafeArea(
+          // Notice how we return the AutoRouter() widget 
+          // instead of extending AutoRouter!
+          child: AutoRouter(),
+        )
+      ),
+    );
+  }
+}`}></CodeBlock>
       </PageSection>
     </div>
   );

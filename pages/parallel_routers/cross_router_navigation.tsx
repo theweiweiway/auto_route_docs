@@ -8,10 +8,22 @@ export default function Home() {
     <div>
       <PageHeader title="Cross-Router Navigation" />
       <PageSection>
-        Navigating across routers/stacks is simple! All you have to do is use
-        <InlineCode>context.tabsRouter</InlineCode> like so:
+        Navigating within a router is the same as before:
         <CodeBlock
-          codeString={`// Navigate to Products/69
+          codeString={`// get the scoped router by calling
+AutoRouter.of(context).push(ProductsRoute())
+// or using the extension
+context.router.push(ProductsRoute())`}
+        /> 
+
+        However, if you want to navigate across routers/stacks you need to:
+        <ol>
+          <li>set the active index to match the new router/stack's index</li>
+          <li>select the router/stack</li>
+          <li>push the desired route</li>
+        </ol>
+        <CodeBlock
+          codeString={`// Navigate to products/69
 
 context.tabsRouter
   ..setActiveIndex(0) // change the current router/stack

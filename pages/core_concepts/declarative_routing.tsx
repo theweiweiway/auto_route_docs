@@ -35,7 +35,7 @@ class _ProfileDataWrapperPageState extends State<UserDataCollectorPage> {
     Widget build(context) => AutoRouter.declarative(onGenerateRoutes: (_, __) { 
           return [
             // Declaratively define your routes here
-            if (firstName.isEmpty) ProfileDataAgeRoute(onNext: (str) {
+            ProfileDataAgeRoute(onNext: (str) {
                 setState(() {
                     age = str;
                 });
@@ -68,12 +68,17 @@ class ProfileData {
 }
 `}
         />
-        And now, attach the <InlineCode>ProfileDataWrapperPage</InlineCode> to
-        the <InlineCode>profileDataRouter</InlineCode> like so:
+        Here, the user is first presented with the <InlineCode>ProfileDataFirstNameRoute</InlineCode>.
+        After entering their name, they would click the next button which would trigger the <InlineCode>onNext</InlineCode>
+        callback to fire in this wrapper page. This action in turn changes the state of the <InlineCode>firstName</InlineCode> variable.
+        Since it is no longer empty, the <InlineCode>ProfileDataFirstNameRoute</InlineCode> will no longer 
+        exist in the stack and instead, the <InlineCode>ProfileDataLastNameRoute</InlineCode> will be showing. 
+        <p/>
+        Finally, attach the <InlineCode>ProfileDataWrapperPage</InlineCode> to
+        the <InlineCode>profileDataRouter</InlineCode> to complete the declarative setup.
         <CodeBlock
           codeString={`const profileDataRouter = AutoRoute(
   path: '/profile_data',
-  name: 'ProfileDataStack',
   page: ProfileDataWrapperPage, 
   children: [
     AutoRoute(page: ProfileDataFirstNameRoute),
@@ -84,17 +89,24 @@ class ProfileData {
         />
       </PageSection>
       <PageSection title="Usage">
-        Now, simply push the <InlineCode>ProfileDataStack</InlineCode> wherever
-        you need it:
+        Now, simply push the <InlineCode>ProfileDataWrapperRoute</InlineCode> wherever
+        you need it.
         <CodeBlock
-          codeString={`context.router.root.push(ProfileDataStack(onResult: (data) {
-// do something with data here
+          codeString={`context.router.root.push(ProfileDataWrapperRoute(onResult: (data) {
+  // do something with data here such as send the data to our database
 }));`}
         />
         This will push the user to the{" "}
         <InlineCode>ProfileDataFirstNameRoute</InlineCode> initially, and then
         the other routes as the user fills out the fields.
-        <p />
+        <p/>
+        Note that there is a <InlineCode>onResult</InlineCode> callback which was defined 
+        in the <InlineCode>ProfileDataFirstNameRoute</InlineCode> above. This callback is triggered
+        when the user completes the flow. In this example, when the user fills in their
+        first name, last name, and then finally their age in the <InlineCode>ProfileDataAgeRoute</InlineCode>,
+        <InlineCode>onResult</InlineCode> will be fired. Now, we can do stuff with this user's data 
+        such as sending it to our database
+        {/* <p />
         <b>**Note**:</b> We pushed this router/stack with
         <InlineCode>ProfileDataStack</InlineCode> in this example. However,
         please note that{" "}
@@ -103,7 +115,7 @@ class ProfileData {
           <InlineCode>ProfileDataWrapperPage</InlineCode>
         </b>
         , you <b>MUST</b> push the router/stack with{" "}
-        <InlineCode>ProfileDataWrapperPage</InlineCode> instead!
+        <InlineCode>ProfileDataWrapperPage</InlineCode> instead! */}
       </PageSection>
     </div>
   );

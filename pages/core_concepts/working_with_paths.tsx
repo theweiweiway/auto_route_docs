@@ -43,8 +43,9 @@ export default function BasicUsage() {
         navigate you to <InlineCode>BookDetailsPage</InlineCode> and
         automatically extract the <InlineCode>bookId</InlineCode> argument from
         the path.
-        <p />
-        Paths can be redirected by using the{" "}
+      </PageSection>
+      <PageSection title="Path Redirects">
+                  Paths can be redirected by using the{" "}
         <InlineCode>RedirectRoute</InlineCode>. The following setup will
         navigate us to <InlineCode>/books</InlineCode> when{" "}
         <InlineCode>/</InlineCode> is matched.
@@ -55,7 +56,7 @@ export default function BasicUsage() {
 ]`}
         />
         Note: <InlineCode>RedirectRoutes</InlineCode> are fullMatched.
-      </PageSection>
+        </PageSection>
     </div>
   );
 }
