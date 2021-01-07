@@ -45,7 +45,7 @@ export default function BasicUsage() {
         the path.
       </PageSection>
       <PageSection title="Path Redirects">
-                  Paths can be redirected by using the{" "}
+        Paths can be redirected by using the{" "}
         <InlineCode>RedirectRoute</InlineCode>. The following setup will
         navigate us to <InlineCode>/books</InlineCode> when{" "}
         <InlineCode>/</InlineCode> is matched.
@@ -56,7 +56,21 @@ export default function BasicUsage() {
 ]`}
         />
         Note: <InlineCode>RedirectRoutes</InlineCode> are fullMatched.
-        </PageSection>
+      </PageSection>
+
+      <PageSection title="Wildcards">
+        AutoRoute supports wildcard matching to handle invalid or undefined
+        paths.
+        <CodeBlock
+          codeString={`AutoRoute(path: '*', page: UnknownRoutePage)
+// it could be used with defined prefixes
+AutoRoute(path: '/profile/*', page: ProfilePage)
+// or it could be used with RedirectRoute
+RedirectRoute(path: '*', redirectTo: '/')`}
+        />
+        Note: be sure to always add your wildcards at the end of your route list
+        because routes are matched in order.
+      </PageSection>
     </div>
   );
 }
