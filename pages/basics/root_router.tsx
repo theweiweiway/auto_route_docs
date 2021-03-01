@@ -53,9 +53,8 @@ class $AppRouter {}`}
         <p />
         When no paths are specified like this example, paths will be generated
         from the page name. For example, <InlineCode>BooksPage</InlineCode> will
-        have the path
-        <b>"book-list-page"</b>. However, if the initial field is set to true,
-        eg. initial: true then it's path will be <b>"/"</b> unless it's
+        have the path <b>"books-page"</b>. However, if the initial field is set
+        to true, eg. initial: true then it's path will be <b>"/"</b> unless it's
         relative. In the case that it's a relative path, then it would be an
         empty string.
         <p />
