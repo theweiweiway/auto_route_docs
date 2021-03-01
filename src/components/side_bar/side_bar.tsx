@@ -146,9 +146,10 @@ function SideBarContent({ toggleDrawer }: any) {
           <Fragment>
             <ListItem
               className={
-                item.url === router.pathname
-                  ? classes.selectedSection
-                  : classes.section
+                // item.url === router.pathname
+                //   ? classes.selectedSection
+                //   :
+                classes.section
               }
               // button
               // onClick={() => {

@@ -1,65 +1,92 @@
 export const sideBarItems = [
   {
-    title: "Basic Usage",
-    section: "basic_usage",
-    url: "/basic_usage",
+    title: "Introduction",
+    section: "introduction",
+    url: "/introduction",
     children: [
       {
-        title: "Setup",
-        url: "/basic_usage/setup",
+        title: "What is AutoRoute?",
+        url: "/introduction",
+      },
+      {
+        title: "Installation and Usage",
+        url: "/introduction/installation_and_usage",
+      },
+      {
+        title: "Generated Routes",
+        url: "/introduction/generated_routes",
+      },
+    ],
+  },
+  {
+    title: "Basics",
+    section: "basics",
+    url: "/basics",
+    children: [
+      {
+        title: "Root Router",
+        url: "/basics/root_router",
+      },
+      {
+        title: "Working with Paths",
+        url: "/basics/working_with_paths",
       },
       {
         title: "Navigation",
-        url: "/basic_usage/navigation",
+        url: "/basics/navigation",
       },
       {
         title: "Passing Arguments",
-        url: "/basic_usage/passing_arguments",
+        url: "/basics/passing_arguments",
+      },
+      {
+        title: "Nested Routes",
+        url: "/basics/nested_routes",
       },
     ],
   },
-  {
-    title: "Core concepts",
-    section: "core_concepts",
-    url: "/core_concepts",
-    children: [
-      {
-        title: "Working with Paths",
-        url: "/core_concepts/working_with_paths",
-      },
-      {
-        title: "Independent Routers",
-        url: "/core_concepts/independent_routers",
-      },
-      {
-        title: "Wrapped Routes",
-        url: "/core_concepts/wrapped_routers",
-      },
-      {
-        title: "Declarative Routing",
-        url: "/core_concepts/declarative_routing",
-      },
-      // {
-      //   title: "Route Guards",
-      //   url: "/core_concepts/route_guards",
-      // },
-    ],
-  },
-  {
-    title: "Parallel Routers",
-    section: "parallel_routers",
-    url: "/parallel_routers",
-    children: [
-      {
-        title: "Setup",
-        url: "/parallel_routers/setup",
-      },
-      {
-        title: "Cross-Router Navigation",
-        url: "/parallel_routers/cross_router_navigation",
-      },
-    ],
-  },
+  // {
+  //   title: "Core concepts",
+  //   section: "core_concepts",
+  //   url: "/core_concepts",
+  //   children: [
+  //     {
+  //       title: "Working with Paths",
+  //       url: "/core_concepts/working_with_paths",
+  //     },
+  //     {
+  //       title: "Independent Routers",
+  //       url: "/core_concepts/independent_routers",
+  //     },
+  //     {
+  //       title: "Wrapped Routes",
+  //       url: "/core_concepts/wrapped_routers",
+  //     },
+  //     {
+  //       title: "Declarative Routing",
+  //       url: "/core_concepts/declarative_routing",
+  //     },
+  //     // {
+  //     //   title: "Route Guards",
+  //     //   url: "/core_concepts/route_guards",
+  //     // },
+  //   ],
+  // },
+  // {
+  //   title: "Parallel Routers",
+  //   section: "parallel_routers",
+  //   url: "/parallel_routers",
+  //   children: [
+  //     {
+  //       title: "Setup",
+  //       url: "/parallel_routers/setup",
+  //     },
+  //     {
+  //       title: "Cross-Router Navigation",
+  //       url: "/parallel_routers/cross_router_navigation",
+  //     },
+  //   ],
+  // },
   // {
   //   title: "Examples",
   //   section: "examples",

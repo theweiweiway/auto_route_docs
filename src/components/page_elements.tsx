@@ -52,18 +52,18 @@ export function PageHeader({ title, subtitle }: any) {
       <Typography variant="h1">{title}</Typography>
       <div style={{ height: 4 }} />
       <Typography variant="body2">{subtitle}</Typography>
-      <div style={{ height: 64 }} />
-      <Divider />
-      <div style={{ height: 16 }} />
+      <div style={{ height: 42 }} />
     </Fragment>
   );
 }
 
-export function PageSection({ title, children }: any) {
+export function PageSection({ title, children, noDivider }: any) {
   return (
     <Fragment>
       <div style={{ height: 18 }} />
-      <Typography variant="h2">{title}</Typography>
+      <Typography variant="h3">{title}</Typography>
+      <div style={{ height: 8 }} />
+      {!noDivider && <Divider />}
       <div style={{ height: 8 }} />
       <Typography variant="body1">{children}</Typography>
       <div style={{ height: 24 }} />
@@ -148,7 +148,13 @@ export function MultiPageImage({
   );
 }
 
-export function PageFooter({ title, children }: any) {
+export function PageFooter({
+  back,
+  next,
+}: {
+  back: { title: string; href: string };
+  next: { title: string; href: string };
+}) {
   return (
     <Fragment>
       <div style={{ height: 24 }} />

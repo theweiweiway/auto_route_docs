@@ -33,7 +33,17 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <SideBar>
-          <Component {...pageProps} />
+          <div
+            style={{
+              margin: "auto",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <div style={{ maxWidth: 900 }}>
+              <Component {...pageProps} />
+            </div>
+          </div>
         </SideBar>
       </ThemeProvider>
     </React.Fragment>

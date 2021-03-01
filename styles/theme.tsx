@@ -11,7 +11,7 @@ const theme = createMuiTheme({
     h2: { fontSize: 30, fontWeight: 400, letterSpacing: -0.6 },
     h3: {
       fontSize: 22,
-      fontWeight: 400,
+      fontWeight: 500,
       letterSpacing: -0.4,
     },
     h4: {
@@ -26,7 +26,9 @@ const theme = createMuiTheme({
       color: "rgb(0, 0, 0, 0.43)",
     },
     body1: {
-      fontSize: 15,
+      marginTop: 8,
+      marginBottom: 8,
+      fontSize: 16,
       color: "#767676",
     },
     body2: {

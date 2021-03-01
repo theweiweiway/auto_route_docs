@@ -1,10 +1,6 @@
 import React, { Fragment } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  a11yDark,
-  vscDarkPlus,
-  atomDark,
-} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { a11yDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export function CodeBlock({
   codeString,
@@ -15,11 +11,13 @@ export function CodeBlock({
 }) {
   return (
     <Fragment>
-      <div style={{ height: 8 }} />
-      <SyntaxHighlighter language={language} style={a11yDark}>
-        {codeString}
-      </SyntaxHighlighter>
-      <div style={{ height: 8 }} />
+      <div style={{ height: 4 }} />
+      <div style={{ fontSize: 15 }}>
+        <SyntaxHighlighter language={language} style={a11yDark}>
+          {codeString}
+        </SyntaxHighlighter>
+      </div>
+      <div style={{ height: 4 }} />
     </Fragment>
   );
 }
@@ -30,6 +28,9 @@ export function InlineCode({ children }: any) {
       {" "}
       <code
         style={{
+          fontFamily: "inherit",
+          wordSpacing: 4,
+          fontSize: 16,
           borderRadius: 4,
           background: "#e5e5e5",
           paddingTop: 1,
