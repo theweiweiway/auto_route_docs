@@ -43,6 +43,29 @@ export const sideBarItems = [
         title: "Nested Routes",
         url: "/basics/nested_routes",
       },
+      {
+        title: "Wrapping Routes",
+        url: "/basics/wrapping_routes",
+      },
+    ],
+  },
+  {
+    title: "Advanced",
+    section: "advanced",
+    url: "/advanced",
+    children: [
+      {
+        title: "Bottom Navigation Bar",
+        url: "/advanced/bottom_navigation_bar_routing",
+      },
+      {
+        title: "Declarative Routing",
+        url: "/advanced/declarative_routing",
+      },
+      {
+        title: "Route Guards",
+        url: "/advanced/route_guards",
+      },
     ],
   },
   // {

@@ -33,16 +33,8 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <SideBar>
-          <div
-            style={{
-              margin: "auto",
-              justifyContent: "center",
-              display: "flex",
-            }}
-          >
-            <div style={{ maxWidth: 900 }}>
-              <Component {...pageProps} />
-            </div>
+          <div style={{ maxWidth: 1000 }}>
+            <Component {...pageProps} />
           </div>
         </SideBar>
       </ThemeProvider>

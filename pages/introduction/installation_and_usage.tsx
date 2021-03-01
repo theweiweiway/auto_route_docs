@@ -1,7 +1,11 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function InstallationAndUsage() {
   return (
@@ -61,6 +65,13 @@ Widget build(BuildContext context){
 }`}
         />
       </PageSection>
+      <PageFooter
+        back={{ name: "What is AutoRoute?", href: "/introduction" }}
+        next={{
+          name: "Generated Routes",
+          href: "/introduction/generated_routes",
+        }}
+      />
     </div>
   );
 }

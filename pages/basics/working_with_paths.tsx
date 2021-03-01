@@ -1,6 +1,10 @@
 import React from "react";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function RootRouter() {
   return (
@@ -81,6 +85,13 @@ RedirectRoute(path: '*', redirectTo: '/')
         <b>Note</b>: be sure to always add your wildcards at the end of your
         route list because routes are matched in order.
       </PageSection>
+      <PageFooter
+        next={{
+          name: "Navigation",
+          href: "/basics/navigation",
+        }}
+        back={{ name: "The Root Router", href: "/basics/root_router" }}
+      />
     </div>
   );
 }

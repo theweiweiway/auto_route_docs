@@ -1,6 +1,10 @@
 import React from "react";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function RootRouter() {
   return (
@@ -44,6 +48,13 @@ BookDetailsRoute(
 context.router.pop();`}
         />
       </PageSection>
+      <PageFooter
+        back={{
+          name: "Navigation",
+          href: "/basics/navigation",
+        }}
+        next={{ name: "Nested Routes", href: "/basics/nested_routes" }}
+      />
     </div>
   );
 }

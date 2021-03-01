@@ -1,6 +1,10 @@
 import React from "react";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function GeneratedRoutes() {
   return (
@@ -19,6 +23,13 @@ export default function GeneratedRoutes() {
 }`}
         />
       </PageSection>
+      <PageFooter
+        back={{
+          name: "Generated Routes",
+          href: "/introduction/generated_routes",
+        }}
+        next={{ name: "The Root Router", href: "/basics/root_router" }}
+      />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import React from "react";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function RootRouter() {
   return (
@@ -37,6 +41,13 @@ router.navigate(BooksRoute())
 router.replace(BooksRoute())`}
         />
       </PageSection>
+      <PageFooter
+        back={{
+          name: "Working with Paths",
+          href: "/basics/working_with_paths",
+        }}
+        next={{ name: "Passing Arguments", href: "/basics/passing_arguments" }}
+      />
     </div>
   );
 }

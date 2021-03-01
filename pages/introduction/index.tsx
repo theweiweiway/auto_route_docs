@@ -1,6 +1,10 @@
 import React from "react";
 import { CodeBlock } from "../../src/components/code_block";
-import { PageImage, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageImage,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function Introduction() {
   const logo = require("../../src/assets/logo_complete.png");
@@ -34,6 +38,12 @@ export default function Introduction() {
         </ul>
         And much, much more...
       </PageSection>
+      <PageFooter
+        next={{
+          name: "Installation and Usage",
+          href: "/introduction/installation_and_usage",
+        }}
+      />
     </div>
   );
 }

@@ -25,9 +25,12 @@ export default function Home() {
         </ul>
       </PageSection>
       <PageSection title="Setup">
-        In order to acheive this, set up your <b>main router</b> with an <InlineCode>AutoRoute</InlineCode>
-       that contains a <InlineCode>HomePage</InlineCode> and <InlineCode>usesTabsRouter</InlineCode> set to true.
-       Now, define all of your separate navigation stacks/routers inside the <InlineCode>children</InlineCode> parameter. 
+        In order to acheive this, set up your <b>main router</b> with an{" "}
+        <InlineCode>AutoRoute</InlineCode>
+        that contains a <InlineCode>HomePage</InlineCode> and{" "}
+        <InlineCode>usesTabsRouter</InlineCode> set to true. Now, define all of
+        your separate navigation stacks/routers inside the{" "}
+        <InlineCode>children</InlineCode> parameter.
         <CodeBlock
           codeString={`@AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -73,14 +76,18 @@ class $AppRouter {}
 `}
         />
         In your <InlineCode>HomePage</InlineCode> widget, use the
-        <InlineCode>AutoTabsRouter</InlineCode>  widget to define your 
-        separate navigation stacks/routers. 
-        <p/>
-        Here, you can easily customize the animation for switching between stacks. 
-        You can also implement the default Flutter <InlineCode>BottomNavigationBar</InlineCode>
+        <InlineCode>AutoTabsRouter</InlineCode> widget to define your separate
+        navigation stacks/routers.
+        <p />
+        Here, you can easily customize the animation for switching between
+        stacks. You can also implement the default Flutter{" "}
+        <InlineCode>BottomNavigationBar</InlineCode>
         or your own customzied navigation bar by using <b>AutoRouter's</b>
-        <InlineCode>context.tabsRouter.activeIndex</InlineCode> and 
-        <InlineCode>context.tabsRouter.setActiveIndex(newIndex)</InlineCode> props. 
+        <InlineCode>context.tabsRouter.activeIndex</InlineCode> and
+        <InlineCode>
+          context.tabsRouter.setActiveIndex(newIndex)
+        </InlineCode>{" "}
+        props.
         <CodeBlock
           codeString={`
   @override

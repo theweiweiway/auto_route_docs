@@ -1,6 +1,10 @@
 import React from "react";
 import { CodeBlock, InlineCode } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function RootRouter() {
   return (
@@ -58,6 +62,16 @@ class $AppRouter {}`}
         There are, however, cases where you would want to use paths. Continue to
         the next section to learn how!
       </PageSection>
+      <PageFooter
+        back={{
+          name: "Generated Routes",
+          href: "/introduction/generated_routes",
+        }}
+        next={{
+          name: "Working with Paths",
+          href: "/basics/working_with_paths",
+        }}
+      />
     </div>
   );
 }

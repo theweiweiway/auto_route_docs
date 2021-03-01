@@ -8,6 +8,8 @@ import {
 } from "@material-ui/core";
 import Router, { useRouter } from "next/router";
 import { Alert } from "@material-ui/lab";
+import { MyLink } from "./link";
+import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 export function PageBreadcrumbs({}: any) {
   const router = useRouter();
@@ -152,13 +154,33 @@ export function PageFooter({
   back,
   next,
 }: {
-  back: { title: string; href: string };
-  next: { title: string; href: string };
+  back?: { name: string; href: string };
+  next: { name: string; href: string };
 }) {
   return (
-    <Fragment>
-      <div style={{ height: 24 }} />
-    </Fragment>
+    <div style={{ display: "flex", marginBottom: 36 }}>
+      {back && (
+        <div>
+          <MyLink fontSize={20} href={back.href}>
+            <ChevronLeft
+              style={{ fontSize: 36, padding: 0, marginBottom: -11 }}
+            />
+            {back.name}
+          </MyLink>
+        </div>
+      )}
+      <div style={{ flexGrow: 1 }} />
+      {next && (
+        <div>
+          <MyLink fontSize={20} href={next.href}>
+            {next.name}{" "}
+            <ChevronRight
+              style={{ fontSize: 36, padding: 0, marginBottom: -11 }}
+            />
+          </MyLink>
+        </div>
+      )}
+    </div>
   );
 }
 
