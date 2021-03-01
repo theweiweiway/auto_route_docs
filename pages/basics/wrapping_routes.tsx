@@ -113,8 +113,8 @@ export default function WrappingRoutes() {
           href: "/basics/nested_routes",
         }}
         next={{
-          name: "Bottom Navigation Bar Routing",
-          href: "/advanced/bottom_navigation_bar_routing",
+          name: "Declarative Routing",
+          href: "/advanced/declarative_routing",
         }}
       />
     </div>

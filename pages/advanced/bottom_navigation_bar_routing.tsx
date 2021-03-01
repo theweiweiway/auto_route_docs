@@ -115,12 +115,12 @@ Widget build(BuildContext context) {
       </PageSection>
       <PageFooter
         back={{
-          name: "Wrapping Routes",
-          href: "/basics/wrapping_routes",
-        }}
-        next={{
           name: "Declarative Routing",
           href: "/advanced/declarative_routing",
+        }}
+        next={{
+          name: "Route Guards",
+          href: "/advanced/route_guards",
         }}
       />
     </div>

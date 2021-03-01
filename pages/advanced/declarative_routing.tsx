@@ -1,7 +1,11 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
 import { InlineCode, CodeBlock } from "../../src/components/code_block";
-import { PageHeader, PageSection } from "../../src/components/page_elements";
+import {
+  PageFooter,
+  PageHeader,
+  PageSection,
+} from "../../src/components/page_elements";
 
 export default function BasicUsage() {
   return (
@@ -126,6 +130,16 @@ class ProfileData {
         , you <b>MUST</b> push the router/stack with{" "}
         <InlineCode>ProfileDataWrapperPage</InlineCode> instead! */}
       </PageSection>
+      <PageFooter
+        back={{
+          name: "Wrapping Routes",
+          href: "/basics/wrapping_routes",
+        }}
+        next={{
+          name: "Bottom Navigation Bar Routing",
+          href: "/advanced/bottom_navigation_bar_routing",
+        }}
+      />
     </div>
   );
 }

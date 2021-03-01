@@ -55,12 +55,12 @@ export const sideBarItems = [
     url: "/advanced",
     children: [
       {
-        title: "Bottom Navigation Bar",
-        url: "/advanced/bottom_navigation_bar_routing",
-      },
-      {
         title: "Declarative Routing",
         url: "/advanced/declarative_routing",
+      },
+      {
+        title: "Bottom Navigation Bar",
+        url: "/advanced/bottom_navigation_bar_routing",
       },
       {
         title: "Route Guards",
