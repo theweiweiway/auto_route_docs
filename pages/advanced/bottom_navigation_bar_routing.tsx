@@ -1,6 +1,7 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
 import { InlineCode, CodeBlock } from "../../src/components/code_block";
+import { MyLink } from "../../src/components/link";
 import {
   PageFooter,
   PageHeader,
@@ -28,7 +29,8 @@ export default function BottomNavigationBarRouting() {
           <li>Built-in and customizable animations between routers</li>
         </ul>
         To begin using <InlineCode>AutoTabsRouter</InlineCode>, we'll need to
-        alter our router setup from the <b>Nested Routes</b> example
+        alter our router setup from the{" "}
+        <MyLink href="/basics/nested_routes">Nested Routes</MyLink> example
         <CodeBlock
           codeString={`@MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',

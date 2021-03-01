@@ -25,8 +25,8 @@ export default function GeneratedRoutes() {
       </PageSection>
       <PageFooter
         back={{
-          name: "Generated Routes",
-          href: "/introduction/generated_routes",
+          name: "Installation and Usage",
+          href: "/introduction/installation_and_usage",
         }}
         next={{ name: "The Root Router", href: "/basics/root_router" }}
       />
