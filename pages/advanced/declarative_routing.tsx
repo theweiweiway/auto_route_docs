@@ -1,6 +1,7 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
 import { InlineCode, CodeBlock } from "../../src/components/code_block";
+import { MyLink } from "../../src/components/link";
 import {
   PageFooter,
   PageHeader,
@@ -20,8 +21,8 @@ export default function BasicUsage() {
       </PageSection>
       <PageSection title="Setup">
         Begin by setting up a wrapper class similar to what we did in{" "}
-        <b>Wrapped Routers</b>, but make sure to extend{" "}
-        <InlineCode>StatefulWidget</InlineCode> instead of{" "}
+        <MyLink href="/basics/wrapping_routes">Wrapping Routes</MyLink>, but
+        make sure to extend <InlineCode>StatefulWidget</InlineCode> instead of{" "}
         <InlineCode>AutoRouter</InlineCode>. Also, implementing{" "}
         <InlineCode>AutoRouteWrapper</InlineCode> is optional if we don't need
         to wrap anything like the example below.
