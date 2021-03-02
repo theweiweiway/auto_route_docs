@@ -27,53 +27,35 @@ export default function BasicUsage() {
         <InlineCode>AutoRouteWrapper</InlineCode> is optional if we don't need
         to wrap anything like the example below.
         <CodeBlock
-          codeString={`class ProfileDataWrapperPage extends StatefulWidget {
-    final Function(ProfileData data) onResult;
+          codeString={`class LoginWrapperPage extends StatefulWidget {
+    final Function(bool isLoggedIn) onLoginResult;
 
-    const ProfileDataWrapperPage({Key key, this.onResult}) : super(key: key);
+    const LoginWrapperPage({Key key, this.onLoginResult}) : super(key: key);
 }
 
 class _ProfileDataWrapperPageState extends State<UserDataCollectorPage> {
-    String firstName = ""; 
-    String lastName = "";
-    String age = ""; 
+    String email = "";
+    String password = "";
 
     @override
-    Widget build(context) => AutoRouter.declarative(onGenerateRoutes: (_, __) { 
+    Widget build(context) => AutoRouter.declarative(
+      onGenerateRoutes: (_, __) { 
           return [
             // Declaratively define your routes here
-            ProfileDataAgeRoute(onNext: (str) {
+            PasswordRoute(onNext: (string) {
                 setState(() {
-                    age = str;
+                  password = string; 
                 });
-                widget.onResult(ProfileData(
-                    firstName: firstName,
-                    lastName: lastName,
-                    age: age
-                ));
+                widget.onLoginResult(true);
             }),
-            if (lastName.isEmpty) ProfileDataLastNameRoute(onNext: (str) {
+            if (email.isEmpty) EmailRoute(onNext: (string) {
                 setState(() {
-                    lastName = str;
-                });
-            }),
-            if (firstName.isEmpty) ProfileDataFirstNameRoute(onNext: (str) {
-                setState(() {
-                    firstName = str;
+                    email: string;
                 });
             }),
           ];
     }); 
-}
-
-class ProfileData {
-    String firstName; 
-    String lastName;
-    String age; 
-
-    const ProfileData({this.firstName, this.lastName, this.age});
-}
-`}
+}`}
         />
         Here, the user is first presented with the{" "}
         <InlineCode>ProfileDataFirstNameRoute</InlineCode>. After entering their

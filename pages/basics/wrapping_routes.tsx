@@ -9,7 +9,7 @@ import {
 export default function WrappingRoutes() {
   return (
     <div>
-      <PageHeader title="Wrapped Routers" />
+      <PageHeader title="Wrapping Routes" />
       <PageSection>
         In the last page, we created a<InlineCode>BooksRouter</InlineCode> and
         <InlineCode>AccountRouter</InlineCode> to handle their respective routes
