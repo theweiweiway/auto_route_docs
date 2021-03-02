@@ -11,69 +11,58 @@ export default function WrappingRoutes() {
     <div>
       <PageHeader title="Wrapped Routers" />
       <PageSection>
-        Sometimes, you may want to wrap specific routers with a state management
-        tool or other widgets. Drawing from the example before in{" "}
-        <b>Independent Routers</b>, we may want to wrap the{" "}
-        <InlineCode>bookRouter</InlineCode> with a{" "}
-        <InlineCode>SafeArea</InlineCode>, <InlineCode>Scaffold</InlineCode> and{" "}
-        <InlineCode>BookBloc</InlineCode>. This would make sure that every
-        single route inside of
-        <InlineCode>bookRouter</InlineCode> has access to the{" "}
-        <InlineCode>BookBloc</InlineCode>, as well as have a{" "}
-        <InlineCode>Scaffold</InlineCode> and <InlineCode>SafeArea</InlineCode>{" "}
-        to work with.
-      </PageSection>
-      <PageSection title="Setup">
-        To acheive this, first define a <InlineCode>BookWrapperPage</InlineCode>
-        with <InlineCode>AutoRouteWrapper</InlineCode>. Now override the
-        <InlineCode>wrappedRoute</InlineCode> widget with whatever you want to
-        wrap the router in, making sure to return <InlineCode>this</InlineCode>{" "}
-        as the child.
+        In the last page, we created a<InlineCode>BooksRouter</InlineCode> and
+        <InlineCode>AccountRouter</InlineCode> to handle their respective routes
+        via nested routes. We can take this example one step further with the
+        <InlineCode>
+          <b>AutoRouteWrapper</b>
+        </InlineCode>{" "}
+        widget. <p /> In many cases, we'll want to wrap a set of routes with
+        other widgets. For example, we may want to wrap our{" "}
+        <InlineCode>BooksRouter</InlineCode> with a state management solution.
+        By doing so, we can scope our state to <b>only</b> books routes instead
+        of lifting state up above our main <InlineCode>AppRouter</InlineCode>.{" "}
+        <p /> In this example, we'll wrap our{" "}
+        <InlineCode>BooksRouter</InlineCode> with a <b>cubit</b> and scope it to
+        just books routes. Let's start by creating a{" "}
+        <InlineCode>BooksWrapperPage</InlineCode> class.
         <CodeBlock
           codeString={`class BookWrapperPage extends AutoRouter with AutoRouteWrapper {
   const BookWrapperPage({Key key}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => BookBloc(),
-        ),
-      ],
-      child: Scaffold(
-        child: SafeArea(
-          child: this,
-        )
-      ),
+    return BlocProvider(
+      create: (context) => BooksCubit(),
+      child: this, // make sure to return "this" so that child routes will be wrapped properly!
     );
   }
 }`}
         />
-        Now, set the <InlineCode>page</InlineCode> argument of your{" "}
-        <InlineCode>bookRouter</InlineCode> to the new{" "}
-        <InlineCode>BookWrapperPage</InlineCode> we just created.
+        Now, we just need to insert our{" "}
+        <InlineCode>BooksWrapperPage</InlineCode> into the
+        <InlineCode>BooksRouter</InlineCode>
         <CodeBlock
-          codeString={`const bookRouter = AutoRoute(
-  path: '/book',
-  name: 'BookStack',
-  page: BookWrapperPage, // we replaced EmptyRouterPage
-  children: [
-    AutoRoute(path: '', page: BookPage),
-    AutoRoute(path: 'settings', page: BookSettingsPage)
-    // ...and more Book pages
-  ],
-);
-`}
+          codeString={`...
+AutoRoute(
+    path: "/books",
+    name: "BooksRouter",
+    page: BooksWrapperPage, // This use to be EmptyRouterPage
+    // EmptyRouterPage is an AutoRoute widget that is used when
+    // you don't want to wrap child routes with anything
+    children: [
+        AutoRoute(path: '', page: BooksPage),
+        AutoRoute(path: 'details', page: BookDetailsPage),
+        RedirectRoute(path: '*', redirectTo: ''),
+    ],
+),
+...`}
         />
-        Now, your <InlineCode>bookRouter</InlineCode> is wrapped with a{" "}
-        <InlineCode>SafeArea</InlineCode>, <InlineCode>Scaffold</InlineCode> and{" "}
-        <InlineCode>BookBloc</InlineCode>!
       </PageSection>
       <PageSection title="The secret ingredient">
-        You may have noticed that in the example above that
+        You may have noticed in the example above that
         <InlineCode>
-          <b>BookWrapperPage</b> extends <b>AutoRouter</b>
+          <b>BooksWrapperPage</b> extends <b>AutoRouter</b>
         </InlineCode>
         . The{" "}
         <InlineCode>
@@ -87,21 +76,14 @@ export default function WrappingRoutes() {
         everything would function perfectly!
         <CodeBlock
           codeString={`class BookWrapperPage extends StatelessWidget {
+  const BookWrapperPage({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => BookBloc(),
-        ),
-      ],
-      child: Scaffold(
-        child: SafeArea(
-          // Notice how we return the AutoRouter() widget 
-          // instead of extending AutoRouter!
-          child: AutoRouter(),
-        )
-      ),
+    return BlocProvider(
+      create: (context) => BooksCubit(),
+      child: AutoRouter(), // We can return AutoRouter() instead of this 
+     // because we are no longer extending the AutoRouter widget
     );
   }
 }`}

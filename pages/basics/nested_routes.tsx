@@ -48,6 +48,40 @@ export default function NestedRoutes() {
 class $AppRouter {}
 `}
         />
+        Now you have separate routers for the <InlineCode>HomePage</InlineCode>,{" "}
+        <InlineCode>Books</InlineCode> routes and{" "}
+        <InlineCode>Account</InlineCode> routes. To navigate within a route, use
+        the standard routing methods that we used in{" "}
+        <MyLink href="/basics/root_router">Root Router</MyLink>
+      </PageSection>
+
+      <PageSection title="Navigating between routers">
+        Routing controllers are context-scoped, so we must perform an additional
+        step when navigating across routers. If we want to navigate from the{" "}
+        <InlineCode>BooksRouter</InlineCode> to{" "}
+        <InlineCode>AccountRouter</InlineCode>, we need to:
+        <ol>
+          <li>
+            get the router (<InlineCode>AccountStack</InlineCode> in this case)
+          </li>
+          <li>
+            push the account routes that we we want by defining them in the{" "}
+            <InlineCode>children</InlineCode> parameter
+          </li>
+        </ol>
+        <CodeBlock
+          codeString={`router.root.push(AccountStack(
+  children: [
+    // push any sequence of Account routes here   
+    // the last route will be the one that is currently visible
+    AccountRoute(),
+    AccountSettingsRoute()
+  ]
+));`}
+        />
+        <b>Note</b> that we gave our <InlineCode>AccountRouter</InlineCode> a{" "}
+        <InlineCode>name</InlineCode> parameter of{" "}
+        <InlineCode>AccountStack</InlineCode> which allows this to work!
       </PageSection>
       <PageFooter
         back={{ name: "Passing Arguments", href: "/basics/passing_arguments" }}
