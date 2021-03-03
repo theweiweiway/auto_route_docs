@@ -109,10 +109,16 @@ class $AppRouter {}`}
           <li>Protected routes via Route Guard</li>
           <li>Declarative Flow Routing for logging in</li>
         </ul>
-        and more
+        and more..
         <p />
         Thanks for checking out the AutoRoute tutorial!
       </PageSection>
+      <PageFooter
+        back={{
+          name: "Bottom Navigation Bar Routing",
+          href: "/advanced/bottom_navigation_bar_routing",
+        }}
+      />
     </div>
   );
 }

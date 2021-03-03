@@ -155,7 +155,7 @@ export function PageFooter({
   next,
 }: {
   back?: { name: string; href: string };
-  next: { name: string; href: string };
+  next?: { name: string; href: string };
 }) {
   return (
     <div style={{ display: "flex", marginBottom: 36 }}>
