@@ -62,7 +62,7 @@ class $AppRouter {}
         <InlineCode>AccountRouter</InlineCode>, we need to:
         <ol>
           <li>
-            get the router (<InlineCode>AccountStack</InlineCode> in this case)
+            get the router (<InlineCode>AccountRouter</InlineCode> in this case)
           </li>
           <li>
             push the account routes that we we want by defining them in the{" "}
@@ -70,7 +70,7 @@ class $AppRouter {}
           </li>
         </ol>
         <CodeBlock
-          codeString={`router.root.push(AccountStack(
+          codeString={`router.root.push(AccountRouter(
   children: [
     // push any sequence of Account routes here   
     // the last route will be the one that is currently visible
@@ -81,7 +81,7 @@ class $AppRouter {}
         />
         <b>Note</b> that we gave our <InlineCode>AccountRouter</InlineCode> a{" "}
         <InlineCode>name</InlineCode> parameter of{" "}
-        <InlineCode>AccountStack</InlineCode> which allows this to work!
+        <InlineCode>AccountRouter</InlineCode> which allows this to work!
       </PageSection>
       <PageFooter
         back={{ name: "Passing Arguments", href: "/basics/passing_arguments" }}

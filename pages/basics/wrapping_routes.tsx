@@ -17,8 +17,8 @@ export default function WrappingRoutes() {
         <InlineCode>
           <b>AutoRouteWrapper</b>
         </InlineCode>{" "}
-        widget. <p /> In many cases, we'll want to wrap a set of routes with
-        other widgets. For example, we may want to wrap our{" "}
+        widget. <p /> In many cases, we'll want to wrap a set of routes with a
+        set of widgets. For example, we may want to wrap our{" "}
         <InlineCode>BooksRouter</InlineCode> with a state management solution.
         By doing so, we can scope our state to <b>only</b> books routes instead
         of lifting state up above our main <InlineCode>AppRouter</InlineCode>.{" "}

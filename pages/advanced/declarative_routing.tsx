@@ -13,19 +13,40 @@ export default function BasicUsage() {
     <div>
       <PageHeader title="Declarative Routing" />
       <PageSection>
-        With the new Navigator 2.0, we can now route to different pages based on
-        state instead of manually calling <InlineCode>router.push</InlineCode>.
-        This is extremely powerful for certain applications like navigation
-        flows where the user needs to fill out a series of questions, like a{" "}
-        <b>Sign Up</b> or <b>Profile Data Collection</b> flow.
-      </PageSection>
-      <PageSection title="Setup">
-        Begin by setting up a wrapper class similar to what we did in{" "}
-        <MyLink href="/basics/wrapping_routes">Wrapping Routes</MyLink>, but
-        make sure to extend <InlineCode>StatefulWidget</InlineCode> instead of{" "}
-        <InlineCode>AutoRouter</InlineCode>. Also, implementing{" "}
-        <InlineCode>AutoRouteWrapper</InlineCode> is optional if we don't need
-        to wrap anything like the example below.
+        One of the most powerful things we can do with{" "}
+        <MyLink href="/basics/wrapping_routes">route wrappers</MyLink> is to
+        declaratively render our routes. For example, we could link a set of
+        routes to <b>state</b> so that pages are automatically pushed and popped
+        in response to the state - elminating the need to call{" "}
+        <InlineCode>router.push</InlineCode> or{" "}
+        <InlineCode>router.pop</InlineCode> altogether! This kind of routing is
+        especially useful for <b>flows</b> (such as a Profile Information flow,
+        or Sign Up flow), and hence may also be called <b>Flow Routing</b>.
+        <p />
+        In this section, we'll build upon our app with a simple{" "}
+        <b>Login Flow</b> that uses declarative routing. In this flow, we have 2
+        pages: an <b>email</b> page and a <b>password</b> page. First, begin by
+        adding our <b>login</b> routes to our app router.
+        <CodeBlock
+          codeString={`@MaterialAutoRouter(
+  replaceInRouteName: 'Page,Route',
+  routes: <AutoRoute>[
+    // our new login routes are defined here!
+    AutoRoute(
+      path: "/login",
+      page: LoginWrapperPage, // we'll get to this LoginWrapperPage next
+      children: [
+        AutoRoute(page: EmailPage),
+        AutoRoute(page: PasswordPage),
+      ]
+    ),
+    ... // our other routes
+  ],
+)
+class $AppRouter {}`}
+        />
+        <p />
+        And here is our <InlineCode>LoginWrapperPage</InlineCode>
         <CodeBlock
           codeString={`class LoginWrapperPage extends StatefulWidget {
     final Function(bool isLoggedIn) onLoginResult;
@@ -33,85 +54,89 @@ export default function BasicUsage() {
     const LoginWrapperPage({Key key, this.onLoginResult}) : super(key: key);
 }
 
-class _ProfileDataWrapperPageState extends State<UserDataCollectorPage> {
+class _LoginWrapperPageState extends State<LoginWrapperPagePage> { 
     String email = "";
-    String password = "";
 
     @override
-    Widget build(context) => AutoRouter.declarative(
+    Widget build(context) => AutoRouter.declarative( // use AutoRouter.declarative  
       onGenerateRoutes: (_, __) { 
-          return [
-            // Declaratively define your routes here
-            PasswordRoute(onNext: (string) {
-                setState(() {
-                  password = string; 
-                });
-                widget.onLoginResult(true);
-            }),
-            if (email.isEmpty) EmailRoute(onNext: (string) {
-                setState(() {
-                    email: string;
-                });
-            }),
-          ];
-    }); 
+        // Declaratively define your routes here
+        return [
+          EmailRoute(onNext: (result) {
+            setState(() {
+                email: result;
+            });
+          }),
+          if (email.isNotEmpty) PasswordRoute(onNext: (result) async {
+            try {
+              // validate the email and password
+              await validateEmailAndPassword(email, result)
+              widget.onLoginResult(true);
+            } catch (e) {
+              // do something with the error
+            }
+          }),
+        ];
+      },
+    ); 
 }`}
         />
-        Here, the user is first presented with the{" "}
-        <InlineCode>ProfileDataFirstNameRoute</InlineCode>. After entering their
-        name, they would click the next button which would trigger the{" "}
-        <InlineCode>onNext</InlineCode>
-        callback to fire in this wrapper page. This action in turn changes the
-        state of the <InlineCode>firstName</InlineCode> variable. Since it is no
-        longer empty, the <InlineCode>ProfileDataFirstNameRoute</InlineCode>{" "}
-        will no longer exist in the stack and instead, the{" "}
-        <InlineCode>ProfileDataLastNameRoute</InlineCode> will be showing.
+        There are several interesting things to point out here! First of all, we
+        are returning 2 routes: our <InlineCode>EmailRoute</InlineCode> and
+        <InlineCode>PasswordRoute</InlineCode>. And our{" "}
+        <InlineCode>PasswordRoute</InlineCode> only gets pushed when our{" "}
+        <InlineCode>email</InlineCode> variable is <b>not</b> empty.
         <p />
-        Finally, attach the <InlineCode>ProfileDataWrapperPage</InlineCode> to
-        the <InlineCode>profileDataRouter</InlineCode> to complete the
-        declarative setup.
-        <CodeBlock
-          codeString={`const profileDataRouter = AutoRoute(
-  path: '/profile_data',
-  page: ProfileDataWrapperPage, 
-  children: [
-    AutoRoute(page: ProfileDataFirstNameRoute),
-    AutoRoute(page: ProfileDataLastNameRoute),
-    AutoRoute(page: ProfileDataAgeRoute),
-  ],
-);`}
-        />
+        Next, there is an <InlineCode>onNext</InlineCode> callback in the
+        <InlineCode>EmailRoute</InlineCode> which is fired when the user enters
+        their email and taps "next". This causes the{" "}
+        <InlineCode>email</InlineCode> variable to be assigned to the input
+        email that was just entered by the user.
+        <p />
+        When that happens, the email variable is no longer empty, which causes
+        the <InlineCode>PasswordRoute</InlineCode> to get pushed. Note how we
+        didn't need to use <InlineCode>router.push</InlineCode> at all!
+        <p />
+        Finally, when the user enters their password and taps "next", this fires
+        the <InlineCode>onNext</InlineCode> callback of the{" "}
+        <InlineCode>PasswordRoute</InlineCode>. Here, we validate the email and
+        password input. If successful, we trigger the{" "}
+        <InlineCode>onLoginResult</InlineCode> callback defined in the{" "}
+        <InlineCode>
+          <b>LoginWrapperPage</b>
+        </InlineCode>
+        . This is important, because the <InlineCode>onLoginResult</InlineCode>{" "}
+        callback allows us to use the{" "}
+        <InlineCode>
+          <b>LoginWrapperPage</b>
+        </InlineCode>{" "}
+        result in other areas of our code!
+        <p />
+        Now, this is just a simple example of declarative routing, but you can
+        get creative and use it however you want. Link your routes to a state
+        management solution, or use a step count instead of checking if strings
+        are empty - the possibilities are endless!
       </PageSection>
       <PageSection title="Usage">
-        Now, simply push the <InlineCode>ProfileDataWrapperRoute</InlineCode>{" "}
-        wherever you need it.
+        To use our new <b>login flow</b>, just simply push the{" "}
+        <InlineCode>
+          <b>LoginWrapperPage</b>
+        </InlineCode>{" "}
+        wherever you need it. This will open up the login flow, and once the
+        flow is completed it will trigger <InlineCode>onLoginResult</InlineCode>{" "}
+        which we can then use to log the user in
         <CodeBlock
-          codeString={`context.router.root.push(ProfileDataWrapperRoute(onResult: (data) {
-  // do something with data here such as send the data to our database
+          codeString={`context.router.root.push(LoginWrapperPage(onLoginResult: (result) {
+  // do something with the login result here, such as logging the user in
 }));`}
         />
-        This will push the user to the{" "}
-        <InlineCode>ProfileDataFirstNameRoute</InlineCode> initially, and then
-        the other routes as the user fills out the fields.
-        <p />
-        Note that there is a <InlineCode>onResult</InlineCode> callback which
-        was defined in the <InlineCode>ProfileDataFirstNameRoute</InlineCode>{" "}
-        above. This callback is triggered when the user completes the flow. In
-        this example, when the user fills in their first name, last name, and
-        then finally their age in the{" "}
-        <InlineCode>ProfileDataAgeRoute</InlineCode>,
-        <InlineCode>onResult</InlineCode> will be fired. Now, we can do stuff
-        with this user's data such as sending it to our database
-        {/* <p />
-        <b>**Note**:</b> We pushed this router/stack with
-        <InlineCode>ProfileDataStack</InlineCode> in this example. However,
-        please note that{" "}
-        <b>
-          if you implement <InlineCode>AutoRouteWrapper</InlineCode> in the{" "}
-          <InlineCode>ProfileDataWrapperPage</InlineCode>
-        </b>
-        , you <b>MUST</b> push the router/stack with{" "}
-        <InlineCode>ProfileDataWrapperPage</InlineCode> instead! */}
+        <b>Note</b> that we are using{" "}
+        <InlineCode>
+          context.router.<b>root</b>
+        </InlineCode>
+        . This is because our login flow was defined at the top level of the
+        router, and not nested. It is generally good practice to put declarative
+        flows at the root level.
       </PageSection>
       <PageFooter
         back={{
