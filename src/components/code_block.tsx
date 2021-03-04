@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
-// import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
+// import { prism } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export function CodeBlock({
   codeString,
@@ -14,7 +14,7 @@ export function CodeBlock({
     <Fragment>
       <div style={{ height: 4 }} />
       <div style={{ fontSize: 15 }}>
-        <SyntaxHighlighter language={language} style={vscDarkPlus}>
+        <SyntaxHighlighter language={language} style={prism}>
           {codeString}
         </SyntaxHighlighter>
       </div>
