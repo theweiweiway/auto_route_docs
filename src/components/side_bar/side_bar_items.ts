@@ -40,6 +40,10 @@ export const sideBarItems = [
         url: "/basics/passing_arguments",
       },
       {
+        title: "Page Transitions",
+        url: "/basics/page_transitions",
+      },
+      {
         title: "Nested Routes",
         url: "/basics/nested_routes",
       },

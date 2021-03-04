@@ -84,7 +84,7 @@ class $AppRouter {}
         <InlineCode>AccountRouter</InlineCode> which allows this to work!
       </PageSection>
       <PageFooter
-        back={{ name: "Passing Arguments", href: "/basics/passing_arguments" }}
+        back={{ name: "Page Transitions", href: "/basics/page_transitions" }}
         next={{ name: "Wrapping Routes", href: "/basics/wrapping_routes" }}
       />
     </div>

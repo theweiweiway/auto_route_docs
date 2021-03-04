@@ -53,7 +53,7 @@ context.router.pop();`}
           name: "Navigation",
           href: "/basics/navigation",
         }}
-        next={{ name: "Nested Routes", href: "/basics/nested_routes" }}
+        next={{ name: "Page Transitions", href: "/basics/page_transitions" }}
       />
     </div>
   );
