@@ -59,9 +59,7 @@ class $AppRouter {}`}
 ...
 Widget build(BuildContext context){
     return MaterialApp.router(
-        routerDelegate: _appRouter.delegate(
-          initialDeepLink: "/books" // optional, if you want to start at a specific route
-        ),
+        routerDelegate: _appRouter.delegate(),
         routeInformationParser: _appRouter.defaultRouteParser(),
     ),
 }`}
