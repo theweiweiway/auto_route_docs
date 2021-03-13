@@ -17,7 +17,7 @@ export default function PageTransitions() {
         <InlineCode>transitionsBuilder</InlineCode> field of your route
         <CodeBlock
           codeString={`...
-AutoRoute(
+CustomRoute(
     path: '', 
     page: BooksPage,
     transitionsBuilder: SlideTransition(
@@ -35,7 +35,7 @@ AutoRoute(
         AutoRoute! For example, the above example can be re-written like so
         <CodeBlock
           codeString={`...
-AutoRoute(
+CustomRoute(
     path: '', 
     page: BooksPage,
     transitionsBuilder: TransitionsBuilders.slideTop
