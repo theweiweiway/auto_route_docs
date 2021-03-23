@@ -61,8 +61,9 @@ AutoRoute(
         />
         <p />
         And that's it! Now, all of your books sub-routes will be wrapped by our
-        `BooksCubit`, `Scaffold`, and `BooksAppBar`. To see a visual
-        representation of what is happening, check out the image below:
+        <InlineCode>BooksCubit</InlineCode>, <InlineCode>Scaffold</InlineCode>,
+        and <InlineCode>BooksAppBar</InlineCode>. To see a visual representation
+        of what is happening, check out the image below:
         <PageImage image={wrapperImg} maxWidth={300} />
       </PageSection>
       <PageFooter
