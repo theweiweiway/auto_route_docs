@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useRef } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   ListItem,
@@ -45,6 +45,15 @@ export default function SideBar({ children }: any) {
   const classes = useStyles();
   const { isSmall } = useScreenSize();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const ref = useRef();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (ref.current) {
+      //@ts-ignore
+      ref.current.getScrollElement().scrollTop = 0;
+    }
+  }, [router.pathname]);
 
   return (
     <div className={classes.wrapper}>
@@ -98,6 +107,7 @@ export default function SideBar({ children }: any) {
       </div>
       {/* This SimpleBar is for page Body, not side bar */}
       <SimpleBar
+        ref={ref}
         style={{
           height: `100vh`,
           padding: 24,

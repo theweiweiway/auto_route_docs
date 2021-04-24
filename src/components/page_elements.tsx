@@ -15,10 +15,6 @@ export function PageBreadcrumbs({}: any) {
   const router = useRouter();
   const parts = router?.pathname.split("/").slice(1);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <Fragment>
       <Breadcrumbs aria-label="breadcrumb">

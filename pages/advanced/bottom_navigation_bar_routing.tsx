@@ -1,5 +1,4 @@
-import { Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { InlineCode, CodeBlock } from "../../src/components/code_block";
 import { MyLink } from "../../src/components/link";
 import {
