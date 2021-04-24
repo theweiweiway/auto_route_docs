@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
   Typography,
   Divider,
@@ -14,6 +14,10 @@ import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 export function PageBreadcrumbs({}: any) {
   const router = useRouter();
   const parts = router?.pathname.split("/").slice(1);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Fragment>
