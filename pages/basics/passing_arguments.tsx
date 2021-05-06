@@ -34,7 +34,7 @@ export default function RootRouter() {
         Now, the generated <InlineCode>BookDetailsRoute</InlineCode> will
         deliver the same arguments to it's corresponding page
         <CodeBlock
-          codeString={`context.router.push(
+          codeString={`context.pushRoute(
 BookDetailsRoute(
     book: book,
     onRateBook: (rating) { 
@@ -48,6 +48,31 @@ BookDetailsRoute(
 context.router.pop();`}
         />
       </PageSection>
+
+      <PageSection title="Awaiting results">
+        If you would prefer to <InlineCode>await</InlineCode> for the results
+        instead of using a callback like above, you can do the following:
+        <CodeBlock
+          codeString={`// In your router declaration, define the return type
+  AutoRoute<int>(page: AwaitPage)`}
+        />
+        Then, use it in your code!
+        <CodeBlock
+          codeString={`// In the AwaitPage, pop with the values you want to return
+onPressed: () async {
+  await context.popRoute(YOUR_VALUES) 
+}
+...
+
+// Now, you can use the values in the page you are pushing from
+onPressed: () async {
+  final int value = await context.pushRoute(AwaitPage())
+  doSomethingWithYourValue(value)
+}`}
+        />
+        (Thanks for the snippet @jlnrrg)
+      </PageSection>
+
       <PageFooter
         back={{
           name: "Navigation",

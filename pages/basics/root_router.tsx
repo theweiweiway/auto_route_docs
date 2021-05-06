@@ -39,9 +39,9 @@ class $AppRouter {}`}
         <b>name</b> unless pushed as a string.
         <p />
         We can navigate to the desired page by simply calling:
-        <CodeBlock codeString={`router.push(BooksRoute())`} />
+        <CodeBlock codeString={`context.pushRoute(BooksRoute())`} />
         to get the the <InlineCode>BooksPage</InlineCode> or
-        <CodeBlock codeString={`router.push(BookDetailsRoute())`} />
+        <CodeBlock codeString={`context.pushRoute(BookDetailsRoute())`} />
         to get the the <InlineCode>BookDetailsPage</InlineCode>
         <p />
         This is only possible because of the

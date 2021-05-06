@@ -17,6 +17,11 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
+          <script>
+            var clicky_site_ids = clicky_site_ids || [];
+            clicky_site_ids.push(101315479);
+          </script>
+          <script async src="//static.getclicky.com/js"></script>
         </Head>
         <body>
           <Main />

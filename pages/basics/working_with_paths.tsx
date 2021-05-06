@@ -18,7 +18,7 @@ export default function RootRouter() {
         <p />
         Now, we can easily navigate to this page via deep link, or with the{" "}
         <InlineCode>pushPath</InlineCode> function:
-        <CodeBlock codeString={`router.pushPath("/books")`} />
+        <CodeBlock codeString={`context.router.pushNamed("/books")`} />
       </PageSection>
       <p />
       <PageSection title="Path Parameters (Dyanmic Segments)">

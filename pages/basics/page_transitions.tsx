@@ -41,7 +41,11 @@ CustomRoute(
     transitionsBuilder: TransitionsBuilders.slideTop
 )
 ...`}
-        />
+        />{" "}
+        <p />
+        If you don't want any transitions, use{" "}
+        <InlineCode>CustomRoute</InlineCode> and leave transitionsBuilder to be
+        empty
       </PageSection>
 
       <PageFooter

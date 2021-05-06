@@ -25,20 +25,20 @@ AutoRouter.of(context)
 context.router
 
 // adds a new entry to pages stack 
-router.push(BooksRoute())
+context.pushRoute(BooksRoute())
 // or push the route via path
-router.pushPath("/books")
+context.router.pushNamed("/books")
 
 // pops the last page unless stack has 1 entry
 context.router.pop()
 
 
-// pops until provided route, if it already exists in stack
-// else adds it to the stack (good for web Apps).
-router.navigate(BooksRoute())
+// if the route exists in the stack, it will pop until the specified route
+// if it does not exist in the stack, it will add it to the stack (good for web)
+context.navigateTo(BooksRoute())
 
 // replaces last entry in stack, throws an error if stack is empty
-router.replace(BooksRoute())`}
+context.replaceRoute(BooksRoute())`}
         />
       </PageSection>
       <PageFooter
