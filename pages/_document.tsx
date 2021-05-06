@@ -1,7 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "../styles/theme";
 
 export default class MyDocument extends Document {
   render() {
@@ -17,11 +16,19 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          <script>
+          {/* <script>
             var clicky_site_ids = clicky_site_ids || [];
             clicky_site_ids.push(101315479);
-          </script>
+          </script> */}
           <script async src="//static.getclicky.com/js"></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+        var clicky_site_ids = clicky_site_ids || [];
+        clicky_site_ids.push(101315479);
+              `,
+            }}
+          ></script>
         </Head>
         <body>
           <Main />
