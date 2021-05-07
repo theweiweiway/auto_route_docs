@@ -24,7 +24,7 @@ export default function RootRouter() {
       <PageSection title="Path Parameters (Dyanmic Segments)">
         You can also define dynamic segments by prefixing with a colon like so:
         <CodeBlock
-          codeString={`AutoRoute(path: '/books/:id', page: BookDetailsPage)`}
+          codeString={`AutoRoute(path: '/books/:bookId', page: BookDetailsPage)`}
         />
         If you do this, the corresponding page's constructor <b>must</b> have a
         parameter annotated with{" "}
@@ -32,7 +32,7 @@ export default function RootRouter() {
         alias/name of the segment.
         <CodeBlock
           codeString={`class BookDetailsPage extends StatelessWidget {
-    BookDetailsPage({@PathParam('id') this.bookId});
+    BookDetailsPage({@PathParam('bookId') this.bookId}); 
 
     final int bookId;
     ...`}

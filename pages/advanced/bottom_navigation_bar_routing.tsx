@@ -14,7 +14,7 @@ export default function BottomNavigationBarRouting() {
       <PageSection>
         Bottom Navigation Bars are widely used to handle seamless routing within
         a significant number of mobile apps. Luckily, AutoRoute comes with an{" "}
-        <InlineCode>AutoTabsRouter</InlineCode> widget that makes this super
+        <InlineCode>AutoTabsScaffold</InlineCode> widget that makes this super
         easy, while implementing several features including:
         <ul>
           <li>Easy navigation between routers</li>
@@ -27,7 +27,7 @@ export default function BottomNavigationBarRouting() {
           </li>
           <li>Built-in and customizable animations between routers</li>
         </ul>
-        To begin using <InlineCode>AutoTabsRouter</InlineCode>, we'll need to
+        To begin using <InlineCode>AutoTabsScaffold</InlineCode>, we'll need to
         alter our router setup from the{" "}
         <MyLink href="/basics/nested_routes">Nested Routes</MyLink> example
         <CodeBlock
@@ -37,7 +37,6 @@ export default function BottomNavigationBarRouting() {
     AutoRoute(
       path: "/",
       page: HomePage,
-      usesTabsRouter: true, // this must be true!
       children: [    
         // our BooksRouter has been moved into the children field
         AutoRoute(
@@ -46,7 +45,7 @@ export default function BottomNavigationBarRouting() {
           page: EmptyRouterPage,
           children: [
             AutoRoute(path: '', page: BooksPage),
-            AutoRoute(path: 'details', page: BookDetailsPage),
+            AutoRoute(path: ':bookId', page: BookDetailsPage),
             RedirectRoute(path: '*', redirectTo: ''),
           ], 
         ),
@@ -68,34 +67,37 @@ export default function BottomNavigationBarRouting() {
 class $AppRouter {}`}
         />
         <p />
-        Now, we can use <InlineCode>AutoTabsRouter</InlineCode> in our app.
+        Now, we can use <InlineCode>AutoTabsScaffold</InlineCode> in our app.
         Check out how much boilerplate code has been eliminated!
         <CodeBlock
           codeString={`@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    body: AutoTabsRouter(  
-      routes: [BooksRouter(), AccountRouter()],
-      duration: Duration(milliseconds: 400),
-      builder: (context, child, animation) {
-        final tabsRouter = context.tabsRouter;
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(tabsRouter.currentRoute.path),
+Widget build(context) {
+  return AutoTabsScaffold(
+    routes: const [
+      BooksRouter(),
+      AccountRouter(),
+    ],
+    bottomNavigationBuilder: (_, tabsRouter) {
+      return BottomNavigationBar(
+        currentIndex: tabsRouter.activeIndex,
+        onTap: tabsRouter.setActiveIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Books',
           ),
-          body: FadeTransition(child: child, opacity: animation),
-          bottomNavigationBar: buildBottomNavigationBar(tabsRouter),
-        );
-      },
-    ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_box),
+            label: 'Account',
+          ),
+        ],
+      );
+    },
   );
 }`}
         />
-        <p />
-        Finally, easily switch between tabs by calling
-        <CodeBlock codeString={`tabsRouter.setActiveIndex(desiredIndex);`} />
       </PageSection>
-      <PageSection title="Cross-tab Navigation">
+      {/* <PageSection title="Cross-tab Navigation">
         {" "}
         To navigate to a specific page in a different navigation tab, we need
         to:
@@ -112,6 +114,17 @@ Widget build(BuildContext context) {
   ..setActiveIndex(0) // update the active index to be the BooksRouter index
   ..innerRouterOf<StackRouter>(BooksRouter.name) // select the BooksRouter 
   .push(BookDetailsRoute()); // now we can push the BooksRouter route we want`}
+        />
+      </PageSection> */}
+      <PageSection title="Cross-tab Navigation">
+        {" "}
+        To navigate to a specific page in a different navigation tab, we can use
+        the <InlineCode>context.tabsRouter.pushToChild</InlineCode> method.{" "}
+        <p /> For example, if we are on in the{" "}
+        <InlineCode>BooksPage</InlineCode> and we want to navigate to{" "}
+        <InlineCode>AccountDetailsPage</InlineCode> we can do:
+        <CodeBlock
+          codeString={`context.tabsRouter.pushToChild(AccountDetailsRoute())`}
         />
       </PageSection>
       <PageFooter

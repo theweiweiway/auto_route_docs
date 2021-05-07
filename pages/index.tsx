@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    Router.push("/introduction");
+    Router.replace("/introduction");
   }, []);
 
   const logo = require("../src/assets/logo_complete.png");

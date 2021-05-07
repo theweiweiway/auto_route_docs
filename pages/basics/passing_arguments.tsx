@@ -22,9 +22,9 @@ export default function RootRouter() {
         rating value on pop.
         <CodeBlock
           codeString={`class BookDetailsPage extends StatelessWidget {
-    const BookDetailsRoute({this.book, this.onRateBook});
- 
-    final Book book; 
+    BookDetailsPage({@PathParam('bookId') this.bookId, this.onRateBook}); 
+
+    final int bookId;  
     final void Function(int) onRateBook;
     ...`}
         />
@@ -36,7 +36,7 @@ export default function RootRouter() {
         <CodeBlock
           codeString={`context.pushRoute(
 BookDetailsRoute(
-    book: book,
+    bookId: 1,
     onRateBook: (rating) { 
         // handle result
     }),
@@ -54,19 +54,24 @@ context.router.pop();`}
         instead of using a callback like above, you can do the following:
         <CodeBlock
           codeString={`// In your router declaration, define the return type
-  AutoRoute<int>(page: AwaitPage)`}
+  AutoRoute<int>(page: BookDetailsPage)`}
         />
         Then, use it in your code!
         <CodeBlock
-          codeString={`// In the AwaitPage, pop with the values you want to return
-onPressed: () async {
-  await context.popRoute(YOUR_VALUES) 
-}
-...
+          codeString={`class BookDetailsPage extends StatelessWidget {
+BookDetailsPage({@PathParam('bookId') this.bookId}); 
+// note that we took out the onRateBook callback
+final int bookId;  
 
-// Now, you can use the values in the page you are pushing from
+// In the BookDetailsPage, pop with the values you want to return
 onPressed: () async {
-  final int value = await context.pushRoute(AwaitPage())
+  context.popRoute(<BOOK_RATING>)
+}`}
+        />
+        And now in the page you are pushing from, simply use it like so
+        <CodeBlock
+          codeString={`onPressed: () async {
+  final int value = await context.pushRoute(BookDetailsPage(bookId: 1))
   doSomethingWithYourValue(value)
 }`}
         />

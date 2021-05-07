@@ -23,7 +23,7 @@ export default function RootRouter() {
 AutoRouter.of(context)
 // or using the extension
 context.router
-
+   
 // adds a new entry to pages stack 
 context.pushRoute(BooksRoute())
 // or push the route via path

@@ -13,46 +13,29 @@ export default function RouteGuards() {
     <div>
       <PageHeader title="Route Guards" />
       <PageSection>
-        Route guards are powerful tools to protect routes from being accessed.
-        The most common use case is an authentication guard that prevents users
-        from accessing certain routes unless they are logged in. Let's see how
-        we can create an <InlineCode>AuthGuard</InlineCode> to protect our{" "}
-        <InlineCode>AccountRouter</InlineCode> routes from being access by
-        unauthenticated users. Furthermore, we'll use the declarative{" "}
-        <b>login flow</b> that we created in{" "}
-        <MyLink href="/advanced/declarative_routing">
-          Declarative Routing
-        </MyLink>{" "}
-        to compliment our <InlineCode>AuthGuard</InlineCode>.
-        <p />
-        Start by creating the guard
+        Route guards are powerful tools that can protect pages, or perform
+        certain actions before entering a page. In this example, we'll use a
+        guard to check if a book exists before pushing the{" "}
+        <InlineCode>BookDetailsPage</InlineCode>. If the bookId is found, we
+        push the page. If not, we'll push a <InlineCode>Not Found</InlineCode>{" "}
+        page. Get started by first creating the guard:
         <CodeBlock
-          codeString={`// mock auth state
-bool isAuthenticated = false;
-          
-class AuthGuard extends AutoRouteGuard {
-
+          codeString={`class CheckIfBookExists extends AutoRouteGuard {
   @override
-  Future<bool> canNavigate(List<PageRouteInfo> pendingRoutes, StackRouter router) async {
-    if (!isAuthenticated) {
-      router.root.push(LoginRouter(
-          onLoginResult: (success) {
-            // after successfully logging in, we can now authenticate the user and return to our regularly scheduled program
-            if (success) {
-              isAuthenticated = true;
-              router.replaceAll(pendingRoutes); // push all pending routes after authenticating
-            }  
-          }));
-      return false;
-    }
-    return true;
+  void onNavigation(NavigationResolver resolver, StackRouter router) async {
+    final bookId = resolver.route.pathParams.get("bookId");
+    final book = checkIfBookExists(bookId);
+    if (book != null)
+      resolver.next(true); // book was found. proceed to the page
+    else
+    router.push(NotFoundRoute());
   }
 }`}
         />
         <p />
-        We just need to put this guard in the{" "}
-        <InlineCode>AccountRouter</InlineCode> now. Here's what our final app
-        router looks like.
+        Now, protect the
+        <InlineCode>BookDetailsPage</InlineCode> with the guard. Here's what our
+        final app router looks like.
         <CodeBlock
           codeString={`@MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -76,16 +59,14 @@ class AuthGuard extends AutoRouteGuard {
           page: BooksWrapperPage,
           children: [
             AutoRoute(path: "", page: BooksPage),
-            AutoRoute(path: "details", page: BookDetailsPage),
+            // add the guard here to check if the bookId exists first before pushing the page
+            AutoRoute(path: ":bookId", guards: [CheckIfBookExists], page: BookDetailsPage),
             RedirectRoute(path: "*", redirectTo: ""),
           ], 
         ),
         AutoRoute(
           path: "account",
           name: "AccountRouter",
-          guards: [AuthGuard], // Adding AuthGuard here will 
-          // guard all account routes, ensuring that the user
-          // must be logged in to access them
           page: EmptyRouterPage,
           children: [
             AutoRoute(path: "", page: AccountPage),
@@ -98,6 +79,22 @@ class AuthGuard extends AutoRouteGuard {
   ],
 )
 class $AppRouter {}`}
+        />
+        <p />
+        Finally, add the guard into your main router declaration and you are
+        done!
+        <CodeBlock
+          codeString={`class App extends StatelessWidget {
+  final _appRouter = AppRouter(checkIfBookExists: CheckIfBookExists());
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      routerDelegate: _appRouter.delegate(),
+    );
+  }
+}`}
         />
         <p />
         And there you go! We now have a full-fledged app with:

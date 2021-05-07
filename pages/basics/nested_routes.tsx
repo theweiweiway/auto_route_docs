@@ -29,7 +29,7 @@ export default function NestedRoutes() {
             page: EmptyRouterPage,
             children: [
                 AutoRoute(path: '', page: BooksPage),
-                AutoRoute(path: 'details', page: BookDetailsPage),
+                AutoRoute(path: ':bookId', page: BookDetailsPage),
                 RedirectRoute(path: '*', redirectTo: ''),
             ],
         ),
@@ -70,7 +70,7 @@ class $AppRouter {}
           </li>
         </ol>
         <CodeBlock
-          codeString={`router.root.push(AccountRouter(
+          codeString={`context.pushRoute(AccountRouter(
   children: [
     // push any sequence of Account routes here   
     // the last route will be the one that is currently visible
