@@ -42,6 +42,7 @@ export default function RouteGuards() {
   routes: <AutoRoute>[
     AutoRoute(
       path: "/login",
+      name: "LoginRouter",
       page: LoginWrapperPage,
       children: [
         AutoRoute(page: EmailPage),
@@ -50,6 +51,7 @@ export default function RouteGuards() {
     ),
     AutoRoute(
       path: "/",    
+      name: "AppRouter",
       page: HomePage,
       usesTabsRouter: true,
       children: [    
@@ -97,23 +99,15 @@ class $AppRouter {}`}
 }`}
         />
         <p />
-        And there you go! We now have a full-fledged app with:
-        <ul>
-          <li>Paths and redirects</li>
-          <li>Nested routes</li>
-          <li>Wrapped routes</li>
-          <li>Bottom navigation bar routing</li>
-          <li>Protected routes via Route Guard</li>
-          <li>Declarative Flow Routing for logging in</li>
-        </ul>
-        and more..
-        <p />
-        Thanks for checking out the AutoRoute tutorial!
       </PageSection>
       <PageFooter
         back={{
           name: "Bottom Navigation Bar Routing",
           href: "/advanced/bottom_navigation_bar_routing",
+        }}
+        next={{
+          name: "Authentication",
+          href: "/advanced/authentication",
         }}
       />
     </div>

@@ -70,6 +70,7 @@ export const sideBarItems = [
         title: "Route Guards",
         url: "/advanced/route_guards",
       },
+      { title: "Authentication", url: "/advanced/authentication" },
     ],
   },
 ];

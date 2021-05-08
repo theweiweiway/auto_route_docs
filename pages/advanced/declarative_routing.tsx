@@ -49,9 +49,9 @@ class $AppRouter {}`}
         And here is our <InlineCode>LoginWrapperPage</InlineCode>
         <CodeBlock
           codeString={`class LoginWrapperPage extends StatefulWidget {
-    final Function(bool isLoggedIn) onLoginResult;
+    final Function(bool isLoggedIn) onLogin;                        
 
-    const LoginWrapperPage({Key key, this.onLoginResult}) : super(key: key);
+    const LoginWrapperPage({Key key, this.onLogin}) : super(key: key);
 }
 
 class _LoginWrapperPageState extends State<LoginWrapperPagePage> { 
@@ -59,7 +59,7 @@ class _LoginWrapperPageState extends State<LoginWrapperPagePage> {
 
     @override
     Widget build(context) => AutoRouter.declarative( // use AutoRouter.declarative  
-      onGenerateRoutes: (_, __) { 
+      routes: (_, __) { 
         // Declaratively define your routes here
         return [
           EmailRoute(onNext: (result) {
@@ -71,7 +71,7 @@ class _LoginWrapperPageState extends State<LoginWrapperPagePage> {
             try {
               // validate the email and password
               await validateEmailAndPassword(email, result)
-              widget.onLoginResult(true);
+              widget.onLogin(true);
             } catch (e) {
               // do something with the error
             }
@@ -101,11 +101,11 @@ class _LoginWrapperPageState extends State<LoginWrapperPagePage> {
         the <InlineCode>onNext</InlineCode> callback of the{" "}
         <InlineCode>PasswordRoute</InlineCode>. Here, we validate the email and
         password input. If successful, we trigger the{" "}
-        <InlineCode>onLoginResult</InlineCode> callback defined in the{" "}
+        <InlineCode>onLogin</InlineCode> callback defined in the{" "}
         <InlineCode>
           <b>LoginWrapperPage</b>
         </InlineCode>
-        . This is important, because the <InlineCode>onLoginResult</InlineCode>{" "}
+        . This is important, because the <InlineCode>onLogin</InlineCode>{" "}
         callback allows us to use the{" "}
         <InlineCode>
           <b>LoginWrapperPage</b>
@@ -123,10 +123,10 @@ class _LoginWrapperPageState extends State<LoginWrapperPagePage> {
           <b>LoginWrapperPage</b>
         </InlineCode>{" "}
         wherever you need it. This will open up the login flow, and once the
-        flow is completed it will trigger <InlineCode>onLoginResult</InlineCode>{" "}
-        which we can then use to log the user in
+        flow is completed it will trigger <InlineCode>onLogin</InlineCode> which
+        we can then use to log the user in
         <CodeBlock
-          codeString={`context.router.root.push(LoginWrapperPage(onLoginResult: (result) {
+          codeString={`context.router.root.push(LoginWrapperPage(onLogin: (result) {
   // do something with the login result here, such as logging the user in
 }));`}
         />
