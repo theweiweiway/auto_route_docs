@@ -42,7 +42,6 @@ export default function RouteGuards() {
   routes: <AutoRoute>[
     AutoRoute(
       path: "/login",
-      name: "LoginRouter",
       page: LoginWrapperPage,
       children: [
         AutoRoute(page: EmailPage),
@@ -50,8 +49,7 @@ export default function RouteGuards() {
       ]
     ),
     AutoRoute(
-      path: "/",    
-      name: "AppRouter",
+      path: "/",     
       page: HomePage,
       usesTabsRouter: true,
       children: [    

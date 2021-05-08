@@ -37,10 +37,10 @@ export default function Authentication() {
                 routes: (_) => [
                   // if the user is logged in, they may proceed to the main App
                   if (authService().isLoggedIn)
-                    AppRouter()
+                    HomeRoute()
                   // if they are not logged in, bring them to the Login page 
                   else
-                    LoginRouter(onLogin: () => authService().logIn),
+                    LoginWrapperRoute(onLogin: () => authService().logIn),
                 ],
             ),
             routeInformationParser:
