@@ -66,7 +66,7 @@ context.route.queryParams`}
         <CodeBlock
           codeString={`<AutoRoute> [
     RedirectRoute(path: '/', redirectTo: '/books'),
-    AutoRoute(path: '/books', page: BookListPage),
+    AutoRoute(path: '/books', page: BooksPage),
 ]`}
         />
         <b>Note</b>: <InlineCode>RedirectRoute</InlineCode>s are fully matched.
