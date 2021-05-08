@@ -119,12 +119,13 @@ Widget build(context) {
       <PageSection title="Cross-tab Navigation">
         {" "}
         To navigate to a specific page in a different navigation tab, we can use
-        the <InlineCode>context.tabsRouter.pushToChild</InlineCode> method.{" "}
+        the standard navigation methods for navigating between different
+        routers.
         <p /> For example, if we are on in the{" "}
         <InlineCode>BooksPage</InlineCode> and we want to navigate to{" "}
         <InlineCode>AccountDetailsPage</InlineCode> we can do:
         <CodeBlock
-          codeString={`context.tabsRouter.pushToChild(AccountDetailsRoute())`}
+          codeString={`context.navigateTo(AccountRouter(children: AccountDetailsRoute()))`}
         />
       </PageSection>
       <PageFooter
