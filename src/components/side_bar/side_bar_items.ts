@@ -73,4 +73,15 @@ export const sideBarItems = [
       { title: "Authentication", url: "/advanced/authentication" },
     ],
   },
+  {
+    title: "Storybook",
+    section: "storybook",
+    url: "/storybook",
+    children: [
+      {
+        title: "Analytics",
+        url: "/storybook/analytics",
+      },
+    ],
+  },
 ];

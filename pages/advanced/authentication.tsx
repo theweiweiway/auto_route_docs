@@ -7,7 +7,7 @@ import {
   PageSection,
 } from "../../src/components/page_elements";
 
-export default function BottomNavigationBarRouting() {
+export default function Authentication() {
   return (
     <div>
       <PageHeader title="Authentication" />
