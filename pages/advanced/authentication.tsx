@@ -35,10 +35,12 @@ export default function Authentication() {
             routerDelegate: AutoRouterDelegate.declarative(   
                 _appRouter,
                 routes: (_) => [
-                    if (authService().isLoggedIn)
-                        AppRouter()
-                    else
-                        LoginRouter(onLogin: () => authService().logIn),
+                  // if the user is logged in, they may proceed to the main App
+                  if (authService().isLoggedIn)
+                    AppRouter()
+                  // if they are not logged in, bring them to the Login page 
+                  else
+                    LoginRouter(onLogin: () => authService().logIn),
                 ],
             ),
             routeInformationParser:
