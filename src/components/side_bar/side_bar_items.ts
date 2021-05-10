@@ -83,8 +83,8 @@ export const sideBarItems = [
         url: "/storybook/analytics",
       },
       {
-        title: "Current Url",
-        url: "/storybook/current_url",
+        title: "Url Helpers",
+        url: "/storybook/url_helpers",
       },
     ],
   },
